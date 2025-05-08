@@ -17,7 +17,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10"
+python = ">=3.10,<3.13"
 pyspellchecker = ">=0.8.2,<0.9.0"
 pyperclip = ">=1.9.0,<2.0.0"
 types-pyperclip = ">=1.9.0.20250218,<2.0.0.0"
@@ -76,7 +76,7 @@ python_files = "test_*.py"
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py39-{linux,macos,windows}, py310-{linux,macos,windows}, py311-{linux,macos,windows}
+envlist = py310-{linux,macos,windows}, py311-{linux,macos,windows}, py312-{linux,macos,windows}
 
 [testenv]
 platform =
