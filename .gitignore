@@ -7,3 +7,4 @@ __pycache__/
 *.egg
 .coverage
 whitespace_normalizer.code-workspace
+.vscode/**
