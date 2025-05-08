@@ -1,0 +1,23 @@
+[project]
+name = "whitespace-normalizer"
+version = "0.1.0"
+description = "A whitespace normalizing application for use with Frontline IEP Direct and Frontline 504."
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pyspellchecker (>=0.8.2,<0.9.0)",
+    "pyperclip (>=1.9.0,<2.0.0)",
+    "types-pyperclip (>=1.9.0.20250218,<2.0.0.0)"
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
