@@ -1,18 +1,18 @@
 """
 A whitespace normalizing application for
-use in conjunction with Frontline IEP Direct and Frontline 504.
+normalizing whitespaces, which can optionally autocorrect spelling errors in the text.
 """
 
 import re
 import tkinter as tk
+from functools import lru_cache
 from tkinter import scrolledtext, ttk
-from log import get_logger
+from typing import NoReturn
 
 import pyperclip
 from spellchecker import SpellChecker
-from typing import NoReturn
-from functools import lru_cache
 
+from log import get_logger
 
 logger = get_logger()
 spell = SpellChecker()
