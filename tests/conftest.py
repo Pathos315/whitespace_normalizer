@@ -2,15 +2,19 @@
 Pytest configuration and shared fixtures.
 """
 
-import os
 import sys
 import tkinter as tk
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+
 import pytest
 
 # Add the src directory to the path so tests can import from it
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+src_path = Path(__file__).resolve().parent.parent / "src"
+if src_path.exists():
+    sys.path.insert(0, str(src_path))
+else:
+    raise FileNotFoundError(f"Source directory not found: {src_path}")
 
 
 @pytest.fixture
