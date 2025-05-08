@@ -127,3 +127,7 @@ def get_logger(
         level=level,
         format_str=format_str,
     )
+
+
+logger = get_logger()
+logger.info("Logger initialized successfully")
