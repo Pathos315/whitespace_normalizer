@@ -1,5 +1,4 @@
 import logging
-import os
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -39,7 +38,8 @@ class Logger:
         self.format_str = format_str
 
         # Create log directory if it doesn't exist
-        os.makedirs(self.log_dir, exist_ok=True)
+        if not self.log_dir.exists():
+            self.log_dir.mkdir(parents=True, exist_ok=True)
 
         # Set up logger
         self.logger = logging.getLogger(self.log_name)
