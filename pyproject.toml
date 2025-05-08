@@ -87,7 +87,7 @@ deps =
     pytest
     pytest-cov
 commands =
-    linux: pytest --cov=src tests/ -v {posargs} -k "not requires_macos and not requires_windows"
-    macos: pytest --cov=src tests/ -v {posargs} -k "not requires_linux and not requires_windows"
-    windows: pytest --cov=src tests/ -v {posargs} -k "not requires_linux and not requires_macos"
+    linux: pytest --cov=src tests/ -vv {posargs} -k "not requires_macos and not requires_windows"
+    macos: pytest --cov=src tests/ -vv {posargs} -k "not requires_linux and not requires_windows"
+    windows: pytest --cov=src tests/ -vv {posargs} -k "not requires_linux and not requires_macos"
 """

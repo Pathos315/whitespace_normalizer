@@ -5,10 +5,10 @@ import pytest
 from src.log import Logger, get_logger
 
 
-@pytest.mark.skip
-@patch("src.log.os.makedirs")
+@pytest.mark.skip("Logger is playing hide and seek.")
+@patch("pathlib.Path.mkdir")
 @patch("src.log.logging.getLogger")
-def test_logger_initialization(mock_get_logger, mock_makedirs):
+def test_logger_initialization(mock_get_logger, mock_mkdir):
     """Test Logger initialization."""
     mock_logger = MagicMock()
     mock_get_logger.return_value = mock_logger
@@ -18,7 +18,7 @@ def test_logger_initialization(mock_get_logger, mock_makedirs):
     )
 
     # Verify log directory creation
-    mock_makedirs.assert_called_once_with("test_logs", exist_ok=True)
+    mock_mkdir.assert_called_once_with(parents=True, exist_ok=True)
 
     # Verify logger setup
     mock_get_logger.assert_called_once_with("test_log")
@@ -29,7 +29,7 @@ def test_logger_initialization(mock_get_logger, mock_makedirs):
     assert logger.log_name == "test_log"
 
 
-@pytest.mark.skip
+@pytest.mark.skip("Logger is playing hide and seek.")
 @patch("src.log.RotatingFileHandler")
 @patch("src.log.logging.StreamHandler")
 @patch("src.log.logging.Formatter")

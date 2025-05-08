@@ -1,5 +1,3 @@
-import pytest
-
 from src.core import preserve_punctuation
 
 

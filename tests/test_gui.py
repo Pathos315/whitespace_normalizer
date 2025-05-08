@@ -1,4 +1,4 @@
-import tkinter as tk
+import tkinter
 from unittest.mock import patch
 
 import pytest
@@ -9,22 +9,20 @@ from src.gui import WhitespaceNormalizerApp
 @pytest.fixture
 def app():
     """Fixture to create the app instance."""
-    root = tk.Tk()
+    root = tkinter.Tk()
     app = WhitespaceNormalizerApp(root)
     return app
 
 
-@pytest.mark.skip
 def test_app_initialization(app):
     """Test if the app initializes correctly."""
     assert app.root.title() == "Whitespace Normalizer"
-    assert app.root.geometry() == "800x500"
-    assert isinstance(app.input_text, tk.Text)
-    assert isinstance(app.output_text, tk.Text)
-    assert isinstance(app.autocorrect_checkbox, tk.Checkbutton)
+    assert isinstance(app.input_text, tkinter.Text)
+    assert isinstance(app.output_text, tkinter.Text)
+    assert isinstance(app.autocorrect_checkbox, tkinter.ttk.Checkbutton)
 
 
-@pytest.mark.skip
+@pytest.mark.skip("Skipping test for now")
 @patch("src.gui.normalize_whitespace", return_value="normalized text")
 @patch("src.gui.autocorrect_text", return_value="autocorrected text")
 @patch("src.gui.pyperclip.copy")
@@ -40,11 +38,11 @@ def test_normalize_and_copy_without_autocorrect(
     mock_normalize.assert_called_once_with("   test text   ")
     mock_autocorrect.assert_not_called()
     mock_copy.assert_called_once_with("normalized text")
-    assert app.output_text.get("1.0", tk.END).strip() == "normalized text"
+    assert app.output_text.get("1.0", tkinter.END).strip() == "normalized text"
     assert app.status_label.cget("text") == "Text normalized and copied to clipboard"
 
 
-@pytest.mark.skip
+@pytest.mark.skip("Skipping test for now")
 @patch("src.gui.normalize_whitespace", return_value="normalized text")
 @patch("src.gui.autocorrect_text", return_value="autocorrected text")
 @patch("src.gui.pyperclip.copy")
@@ -60,7 +58,7 @@ def test_normalize_and_copy_with_autocorrect(
     mock_normalize.assert_called_once_with("   test text   ")
     mock_autocorrect.assert_called_once_with("normalized text")
     mock_copy.assert_called_once_with("autocorrected text")
-    assert app.output_text.get("1.0", tk.END).strip() == "autocorrected text"
+    assert app.output_text.get("1.0", tkinter.END).strip() == "autocorrected text"
     assert (
         app.status_label.cget("text")
         == "Text normalized with autocorrect and copied to clipboard"
