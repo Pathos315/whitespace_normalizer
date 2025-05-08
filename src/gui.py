@@ -29,13 +29,13 @@ class WhitespaceNormalizerApp:
     def _configure_layout(self):
         """Configure the responsive grid layout."""
         # Make rows and columns expand properly
-        COLUMN_CONFIG = [1, 0, 1]
-        ROW_CONFIG = [0, 1, 0, 0]
+        column_config = [1, 0, 1]
+        row_config = [0, 1, 0, 0]
 
-        for i, weight in enumerate(COLUMN_CONFIG):
+        for i, weight in enumerate(column_config):
             self.root.columnconfigure(i, weight=weight)
 
-        for i, weight in enumerate(ROW_CONFIG):
+        for i, weight in enumerate(row_config):
             self.root.rowconfigure(i, weight=weight)
 
     def _create_widgets(self):
