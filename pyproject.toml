@@ -1,23 +1,73 @@
 [project]
 name = "whitespace-normalizer"
-version = "0.1.0"
+version = "0.3.0"
 description = "A whitespace normalizing application for use with Frontline IEP Direct and Frontline 504."
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
+authors = [{ name = "John Fallot", email = "john.fallot@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pyspellchecker (>=0.8.2,<0.9.0)",
     "pyperclip (>=1.9.0,<2.0.0)",
-    "types-pyperclip (>=1.9.0.20250218,<2.0.0.0)"
+    "types-pyperclip (>=1.9.0.20250218,<2.0.0.0)",
 ]
 
 [tool.poetry]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
+black = "^24.3.0"
+mypy = "^1.8.0"
+flake8 = "^7.0.0"
+pre-commit = "^3.6.0"
+ruff = "^0.3.4"
+commitizen = "^3.15.0"
+pyinstaller = "^6.6.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "v$version"
+bump_message = "chore(release): bump version $current_version → $new_version"
+version_files = ["pyproject.toml:version"]
+update_changelog_on_bump = true
+annotated_tag = true
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+select = ["E", "F", "I", "N", "B", "C4", "SIM", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "--verbose --cov=src --cov-report=term --cov-report=xml"
+markers = [
+    "gui: marks tests that require a GUI environment",
+    "integration: marks tests that test multiple components together",
+    "slow: marks tests that are slow running and might be skipped in quick runs",
+]
