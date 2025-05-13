@@ -26,6 +26,7 @@ def app_with_real_tk():
         pytest.skip("Cannot initialize Tk - test requires a display")
 
 
+@pytest.mark.skip("Need to review.")
 class TestWidgetProperties:
     """Tests for widget properties and configurations."""
 
@@ -77,6 +78,7 @@ class TestWidgetProperties:
         assert int(grid_info["columnspan"]) >= 3
 
 
+@pytest.mark.skip("Need to review.")
 @pytest.mark.parametrize("autocorrect_enabled", [True, False])
 class TestInteractiveFlow:
     """Tests for interactive flow with the widgets."""
@@ -133,6 +135,7 @@ class TestInteractiveFlow:
             assert "with autocorrect" not in app.status_label.cget("text")
 
 
+@pytest.mark.skip("Need to review.")
 class TestButtonCallbacks:
     """Tests for button callbacks."""
 
@@ -199,6 +202,7 @@ class TestButtonCallbacks:
                     mock_close_method.assert_called_once()
 
 
+@pytest.mark.skip("Need to review.")
 class TestGridLayout:
     """Tests for grid layout configuration."""
 

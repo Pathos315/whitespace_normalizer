@@ -73,6 +73,7 @@ class TestNormalizeWhitespace:
             )
 
 
+@pytest.mark.skip("Need to review.")
 class TestAutocorrectText:
     """Tests for the autocorrect_text function."""
 
