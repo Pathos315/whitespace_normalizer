@@ -18,7 +18,7 @@ class Logger:
         log_name="application",
         level=logging.INFO,
         format_str="%(asctime)s - %(levelname)s - %(message)s",
-    ):
+    ) -> None:
         """
         Initialize the RotatingLogs logger.
 
@@ -52,7 +52,7 @@ class Logger:
         # Set up rotating file handler
         self.setup_handler()
 
-    def setup_handler(self):
+    def setup_handler(self) -> None:
         """Set up the rotating file handler."""
         log_file = self.log_dir / f"{self.log_name}.log"
 
@@ -76,25 +76,25 @@ class Logger:
         console_handler.setFormatter(formatter)
         self.logger.addHandler(console_handler)
 
-    def debug(self, message):
+    def debug(self, message: object, **kwargs) -> None:
         """Log a debug message."""
-        self.logger.debug(message)
+        self.logger.debug(message, **kwargs)
 
-    def info(self, message):
+    def info(self, message: object, **kwargs) -> None:
         """Log an info message."""
-        self.logger.info(message)
+        self.logger.info(message, **kwargs)
 
-    def warning(self, message):
+    def warning(self, message: object, **kwargs) -> None:
         """Log a warning message."""
-        self.logger.warning(message)
+        self.logger.warning(message, **kwargs)
 
-    def error(self, message):
+    def error(self, message: object, **kwargs) -> None:
         """Log an error message."""
-        self.logger.error(message)
+        self.logger.error(message, **kwargs)
 
-    def critical(self, message):
+    def critical(self, message: object, **kwargs) -> None:
         """Log a critical message."""
-        self.logger.critical(message)
+        self.logger.critical(message, **kwargs)
 
 
 def get_logger(
@@ -104,7 +104,7 @@ def get_logger(
     log_name="application",
     level=logging.INFO,
     format_str="%(asctime)s - %(levelname)s - %(message)s",
-):
+) -> Logger:
     """
     Get a configured RotatingLogs instance.
 

@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -7,10 +7,8 @@ from src.core import (
     TAB_PATTERN,
     WHITESPACE_PATTERN,
     autocorrect_text,
-    logger,
     normalize_whitespace,
     preserve_punctuation,
-    spell,
 )
 
 

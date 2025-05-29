@@ -15,7 +15,7 @@ class WhitespaceNormalizerApp:
     A widget to normalize whitespaces.
     """
 
-    def __init__(self, root: tk.Tk):
+    def __init__(self, root: tk.Tk) -> None:
         self.root = root
         self.root.title("Whitespace Normalizer")
         self.root.geometry("800x500")
@@ -38,7 +38,7 @@ class WhitespaceNormalizerApp:
         for i, weight in enumerate(row_config):
             self.root.rowconfigure(i, weight=weight)
 
-    def _create_widgets(self):
+    def _create_widgets(self) -> None:
         """
         Creates the overall layout of the application.
         """
@@ -125,7 +125,7 @@ class WhitespaceNormalizerApp:
         # Make sure status update is displayed
         self.root.update_idletasks()
 
-    def copy_to_clipboard(self, normalized_text):
+    def copy_to_clipboard(self, normalized_text: str) -> None:
         try:
             pyperclip.copy(normalized_text)
             logger.info("Text copied to clipboard successfully")

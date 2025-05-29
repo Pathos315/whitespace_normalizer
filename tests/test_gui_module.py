@@ -39,8 +39,11 @@ class TestGuiEdgeCases:
 
         with patch("src.gui.logger", autospec=True):
             app = WhitespaceNormalizerApp(root)
+            app.input_text = MagicMock()
+            app.autocorrect_var = MagicMock()
             app.input_text.get.return_value = ""
             app.autocorrect_var.get.return_value = True
+            app.output_text = MagicMock()
 
             # Call normalize_and_copy
             app.normalize_and_copy()
@@ -55,7 +58,7 @@ class TestGuiEdgeCases:
             mock_copy.assert_called_once_with("")
 
             # Output should be updated with empty string
-            app.output_text.delete.assert_called_once()
+            app.output_text.delete.assert_called_once_with("1.0", "end")
             app.output_text.insert.assert_called_once_with("1.0", "")
 
     @patch("src.gui.normalize_whitespace")
@@ -74,6 +77,8 @@ class TestGuiEdgeCases:
 
         with patch("src.gui.logger", autospec=True):
             app = WhitespaceNormalizerApp(root)
+            app.input_text = MagicMock()
+            app.autocorrect_var = MagicMock()
             app.input_text.get.return_value = large_input
             app.autocorrect_var.get.return_value = False
             app.copy_to_clipboard = MagicMock()
@@ -91,6 +96,7 @@ class TestGuiEdgeCases:
             app.copy_to_clipboard.assert_called_once_with(large_output)
 
             # Output should be updated
+            app.output_text = MagicMock()
             app.output_text.delete.assert_called_once()
             app.output_text.insert.assert_called_once_with("1.0", large_output)
 
@@ -109,6 +115,9 @@ class TestGuiEdgeCases:
 
         with patch("src.gui.logger", autospec=True):
             app = WhitespaceNormalizerApp(root)
+            app.input_text = MagicMock()
+            app.autocorrect_var = MagicMock()
+            app.output_text = MagicMock()
             app.input_text.get.return_value = unicode_input
             app.autocorrect_var.get.return_value = False
             app.copy_to_clipboard = MagicMock()
@@ -142,6 +151,8 @@ class TestAppInstanceBehavior:
                 assert app1.autocorrect_var is not app2.autocorrect_var
 
                 # Set different values
+                app1.autocorrect_var = MagicMock()
+                app2.autocorrect_var = MagicMock()
                 app1.autocorrect_var.get.return_value = True
                 app2.autocorrect_var.get.return_value = False
 
@@ -165,6 +176,8 @@ class TestAppInstanceBehavior:
                 # Mock the normalize function to return predictable output
                 with patch("src.gui.normalize_whitespace", return_value="test input"):
                     # Set autocorrect off
+                    app.autocorrect_var = MagicMock()
+
                     app.autocorrect_var.get.return_value = False
 
                     # Create a mock for copy_to_clipboard

@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import ttk
+from tkinter.scrolledtext import ScrolledText
 from unittest.mock import ANY, MagicMock, patch
 
 import pytest
@@ -30,10 +32,13 @@ def app_with_real_tk():
 class TestWidgetProperties:
     """Tests for widget properties and configurations."""
 
-    def test_input_text_properties(self, app_with_real_tk):
+    def test_input_text_properties(self, app_with_real_tk: WhitespaceNormalizerApp):
         """Test properties of the input text widget."""
         app = app_with_real_tk
-        assert isinstance(app.input_text, tk.scrolledtext.ScrolledText)
+        # Check if input_text is a ScrolledText widget
+
+        assert isinstance(app.input_text, ScrolledText)
+        assert app.input_text.cget("wrap") == "word"
         assert app.input_text.cget("wrap") == "word"
 
         # Check grid placement
@@ -41,10 +46,10 @@ class TestWidgetProperties:
         assert grid_info["row"] == "1"
         assert grid_info["column"] == "0"
 
-    def test_output_text_properties(self, app_with_real_tk):
-        """Test properties of the output text widget."""
+    def test_output_text_properties(self, app_with_real_tk: WhitespaceNormalizerApp):
         app = app_with_real_tk
-        assert isinstance(app.output_text, tk.scrolledtext.ScrolledText)
+        assert isinstance(app.output_text, ScrolledText)
+        assert app.output_text.cget("wrap") == "word"
         assert app.output_text.cget("wrap") == "word"
 
         # Check grid placement
@@ -52,10 +57,15 @@ class TestWidgetProperties:
         assert grid_info["row"] == "1"
         assert grid_info["column"] == "2"
 
-    def test_autocorrect_checkbox_properties(self, app_with_real_tk):
+    def test_autocorrect_checkbox_properties(
+        self, app_with_real_tk: WhitespaceNormalizerApp
+    ):
         """Test properties of the autocorrect checkbox."""
         app = app_with_real_tk
-        assert isinstance(app.autocorrect_checkbox, tk.ttk.Checkbutton)
+        # Check if autocorrect_checkbox is a ttk.Checkbutton
+
+        assert isinstance(app.autocorrect_checkbox, ttk.Checkbutton)
+        assert isinstance(app.autocorrect_checkbox, ttk.Checkbutton)
 
         # Check text property
         text = app.autocorrect_checkbox.cget("text")
@@ -64,10 +74,11 @@ class TestWidgetProperties:
         # Check variable binding
         assert app.autocorrect_var.get() is False  # Default should be False
 
-    def test_status_label_properties(self, app_with_real_tk):
+    def test_status_label_properties(self, app_with_real_tk: WhitespaceNormalizerApp):
         """Test properties of the status label."""
         app = app_with_real_tk
-        assert isinstance(app.status_label, tk.ttk.Label)
+        assert isinstance(app.status_label, ttk.Label)
+        assert isinstance(app.status_label, ttk.Label)
 
         # Initially, the status label should be empty
         assert app.status_label.cget("text") == ""
@@ -91,7 +102,7 @@ class TestInteractiveFlow:
         mock_copy,
         mock_autocorrect,
         mock_normalize,
-        app_with_real_tk,
+        app_with_real_tk: WhitespaceNormalizerApp,
         autocorrect_enabled,
     ):
         """Test the flow of text through the application."""
@@ -147,6 +158,8 @@ class TestButtonCallbacks:
                 with patch("src.gui.logger", autospec=True):
                     # Create a spy for the Button constructor
                     def capture_button_args(*args, **kwargs):
+                        """Capture the arguments passed to the Button constructor."""
+                        capture_button_args = MagicMock()
                         capture_button_args.called_with = (args, kwargs)
                         return MagicMock()
 
@@ -178,6 +191,7 @@ class TestButtonCallbacks:
                 with patch("src.gui.logger", autospec=True):
                     # Create a spy for the Button constructor
                     def capture_button_args(*args, **kwargs):
+                        capture_button_args = MagicMock()
                         capture_button_args.called_with = (args, kwargs)
                         return MagicMock()
 

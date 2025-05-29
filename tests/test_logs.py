@@ -106,7 +106,7 @@ def test_get_logger(mock_logger_class):
         max_files=4,
         max_size=4096,
         log_name="test_log",
-        level="DEBUG",
+        level=20,  # DEBUG level
         format_str="%(message)s",
     )
 
@@ -116,7 +116,7 @@ def test_get_logger(mock_logger_class):
         max_files=4,
         max_size=4096,
         log_name="test_log",
-        level="DEBUG",
+        level=20,  # INFO level
         format_str="%(message)s",
     )
     assert logger == mock_logger_instance
